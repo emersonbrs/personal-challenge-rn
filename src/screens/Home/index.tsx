@@ -1,12 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
-import { Text } from 'react-native';
 
-import { Container } from './styles';
+import { Container, Title } from './styles';
 
 export function Home() {
   return (
     <Container>
-      <Text>Initial Project!</Text>
+      <Title>Initial Project!</Title>
       <StatusBar style="auto" />
     </Container>
   );
