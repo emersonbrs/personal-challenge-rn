@@ -14,7 +14,7 @@ export function Details() {
       <Header />
       
       <CardTeam>
-        <TeamView />
+        {/* <TeamView /> */}
         <TextHour>Hoje 14:30</TextHour>
       </CardTeam>
 

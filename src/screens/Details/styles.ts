@@ -1,10 +1,9 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
 import styled from "styled-components/native";
-import theme from '@theme/index';
 
 export const Container = styled(SafeAreaView)`
     flex: 1;
-    background-color: ${theme.COLORS.BLUE_200};
+    background-color: ${({ theme }) => theme.COLORS.BLUE_200};
 `;
 
 export const CardTeam = styled.View`
@@ -16,8 +15,8 @@ export const CardTeam = styled.View`
 
 export const TextHour = styled.Text`
     font-size: 12px;
-    color: ${theme.COLORS.WHITE};
-    font-family: ${theme.FONT_FAMILY.BOLD};
+    color: ${({ theme }) => theme.COLORS.WHITE};
+    font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
     text-align: center;
     padding: 25px;
 `;

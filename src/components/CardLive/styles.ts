@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import theme from '@theme/index';
 
 // Card
 export const CardContainer = styled.View``
@@ -7,7 +6,7 @@ export const CardContainer = styled.View``
 export const CardContent = styled.View`
   width: 312px;
   height: 176px;
-  background-color: ${theme.COLORS.BLUE_100};
+  background-color: ${({ theme }) => theme.COLORS.BLUE_100};
   border-radius: 16px;
   padding: 24px;
   margin: 24px;
@@ -19,7 +18,7 @@ export const LiveContainer = styled.View`
   top: 0;
   right: 0;
   
-  background-color: ${theme.COLORS.RED};
+  background-color: ${({ theme }) => theme.COLORS.RED};
 
   padding: 8px;
   border-top-right-radius: 16px;
@@ -30,9 +29,9 @@ export const LiveContainer = styled.View`
 `;
 
 export const LiveText = styled.Text`
-  color: ${theme.COLORS.WHITE};
+  color: ${({ theme }) => theme.COLORS.WHITE};
 
-  font-family: ${theme.FONT_FAMILY.BOLD};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: 8px;
   font-weight: bold;
 `;
@@ -45,15 +44,15 @@ export const Footer = styled.View`
   right: 0;
   height: 30px;
   border-top-width: 1px;
-  border-top-color: ${theme.COLORS.GRAY_300};
+  border-top-color: ${({ theme }) => theme.COLORS.GRAY_300};
   flex-direction: row;
   align-items: center;
   padding-left: 8px;
 `;
 
 export const FooterText = styled.Text`
-  color: ${theme.COLORS.WHITE};
-  font-family: ${theme.FONT_FAMILY.REGULAR};
+  color: ${({ theme }) => theme.COLORS.WHITE};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
   font-size: 8px;
   margin-left: 5px;
 `;
@@ -62,6 +61,6 @@ export const FooterCircle = styled.View`
   width: 16px;
   height: 16px;
   border-radius: 8px;
-  background-color: ${theme.COLORS.GRAY_200};
+  background-color: ${({ theme }) => theme.COLORS.GRAY_200};
   margin-right: 4px;
 `;
