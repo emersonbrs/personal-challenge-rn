@@ -7,14 +7,14 @@ import { CSGOContextProvider } from '@contexts/CSGOContext';
 import theme from '@theme/index';
 import { ThemeProvider } from 'styled-components/native';
 
-import { Home } from '@screens/Home';
+import { Details } from '@screens/Details';
 
-test('check if screen <Home /> are correctly working', () => {
+test('check if screen <Details /> are correctly working', () => {
     render(
         <ThemeProvider theme={theme}>
             <CSGOContextProvider>
                 <NavigationContainer>
-                    <Home />
+                    <Details />
                 </NavigationContainer>
             </CSGOContextProvider>
         </ThemeProvider>
