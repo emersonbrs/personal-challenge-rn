@@ -6,18 +6,16 @@ import theme from '@theme/index';
 
 import { Routes } from './src/routes';
 
-import { CSGOContext } from '@contexts/CSGOContext'
+import { CSGOContextProvider } from '@contexts/CSGOContext'
 
 export default function App() {
   const [fontLoad] = useFonts({ Roboto_500Medium, Roboto_700Bold, Roboto_400Regular });
 
   return (
     <ThemeProvider theme={theme}>
-      <CSGOContext.Provider value={{csgo: {
-        data: {}
-      }}}>
+      <CSGOContextProvider>
         {fontLoad ? <Routes /> : <ActivityIndicator />}
-      </CSGOContext.Provider>
+      </CSGOContextProvider>
     </ThemeProvider>
   );
 }

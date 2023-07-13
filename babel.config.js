@@ -13,7 +13,8 @@ module.exports = function(api) {
             '@screens': './src/screens',
             '@theme': './src/theme',
             '@contexts': './src/contexts',
-            '@services': './src/services'
+            '@services': './src/services',
+            '@hooks': './src/hooks'
           }
         }
       ]

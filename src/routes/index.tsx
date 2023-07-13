@@ -1,11 +1,10 @@
-import { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { AppRoutes } from './app.routes';
 
-import { CSGOContext } from '@contexts/CSGOContext'
+import { useList } from '@hooks/useList';
 
 export function Routes(){
-    const contextData = useContext(CSGOContext);
+    const { getList } = useList();
 
     return (
         <NavigationContainer>

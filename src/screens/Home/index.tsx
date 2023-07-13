@@ -1,37 +1,32 @@
 import { useEffect, useState } from 'react';
+import { TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+
 import { api } from '@services/api'
 
 import { Container, Title } from './styles';
 import { CardLive } from '@components/CardLive'
-import { TouchableOpacity, ScrollView } from 'react-native';
+
+import { useList } from '../../hooks/useList';
 
 export function Home() {
-
   const navigation = useNavigation();
-  const [games, setGames] = useState([]);
+
+  const { getList, dataList } = useList();
 
   function handleDetails(){
     navigation.navigate('details');
   }
 
-  async function test() {
-    const params = {
-      token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
-    };
-    const response = await api.get('/csgo/matches?sort=&page=1&per_page=50', {params});
-    setGames(response.data);
-  }
-  
   useEffect(() => {
-    test();
+    getList();
   },[])
 
   return (
     <Container>
       <Title>Partidas</Title>
       <ScrollView>
-        {games.map((item, index) => (
+        {dataList.map((item) => (
           <TouchableOpacity onPress={handleDetails}>
               <CardLive games={item}/>
           </TouchableOpacity>
