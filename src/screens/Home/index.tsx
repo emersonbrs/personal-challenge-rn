@@ -1,13 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-import { api } from '@services/api'
 
 import { Container, Title } from './styles';
 import { CardLive } from '@components/CardLive'
 
-import { useList } from '../../hooks/useList';
+import { useList } from '@hooks/useList';
 
 export function Home() {
   const navigation = useNavigation();
@@ -26,7 +24,7 @@ export function Home() {
     <Container>
       <Title>Partidas</Title>
       <ScrollView>
-        {dataList.map((item) => (
+        {dataList && dataList.map((item) => (
           <TouchableOpacity onPress={handleDetails}>
               <CardLive games={item}/>
           </TouchableOpacity>
