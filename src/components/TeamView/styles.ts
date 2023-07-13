@@ -6,12 +6,18 @@ export const TeamWrapper = styled.View`
   flex: 1;
 `;
 
-export const TeamLogo = styled.View`
+export const TeamLogo = styled.Image`
   width: 60px;
   height: 60px;
   border-radius: 50px;
-  background-color: ${theme.COLORS.GRAY_200};
 `;
+
+// export const TeamLogo = styled.View`
+//   width: 60px;
+//   height: 60px;
+//   border-radius: 50px;
+//   background-color: ${theme.COLORS.GRAY_200};
+// `;
 
 export const TeamText = styled.Text`
   font-family: ${theme.FONT_FAMILY.REGULAR};

@@ -19,6 +19,12 @@
       ],
       "@theme/*": [
         "./src/theme/*"
+      ],
+      "@contexts/*": [
+        "./src/contexts/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
       ]
     }
   }

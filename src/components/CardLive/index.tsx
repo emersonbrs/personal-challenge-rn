@@ -1,4 +1,7 @@
 import React from 'react';
+import moment from 'moment';
+import 'moment/locale/pt-br';
+
 import { View } from 'react-native';
 import { 
   CardContent,
@@ -11,18 +14,27 @@ import {
 
 import { TeamView } from '@components/TeamView'
 
-export function CardLive() {
+export function CardLive({ games }) {
+  
+  function agendado(scheduled){
+    const date = moment(scheduled).utc().locale('pt-br');
+
+    const dayOfWeek = date.format('dddd');
+
+    return dayOfWeek;
+  }
+
   return (
     <View>
       <CardContent>
         <LiveContainer>
-          <LiveText>AGORA</LiveText>
+          <LiveText>{agendado(games.scheduled_at)}</LiveText>
         </LiveContainer>
-        <TeamView />
+        <TeamView teams={games.opponents}/>
         <Footer>
           <FooterCircle />
           <FooterText>
-            League + series
+            {games.league.name} + {games.serie.season}
           </FooterText>
         </Footer>
       </CardContent>
