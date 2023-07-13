@@ -1,4 +1,4 @@
-import { ActivityIndicator, StatusBar, SafeAreaView } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { ThemeProvider } from 'styled-components';
 import { useFonts, Roboto_500Medium, Roboto_700Bold, Roboto_400Regular } from '@expo-google-fonts/roboto';
 
@@ -11,14 +11,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar 
-          barStyle="dark-content"
-          backgroundColor="transparent"
-          translucent
-        />
         {fontLoad ? <Routes /> : <ActivityIndicator />}
-      </SafeAreaView>
     </ThemeProvider>
   );
 }

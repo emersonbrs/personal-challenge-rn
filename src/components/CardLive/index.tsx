@@ -16,7 +16,7 @@ export function CardLive() {
     <View>
       <CardContent>
         <LiveContainer>
-          <LiveText>Agora</LiveText>
+          <LiveText>AGORA</LiveText>
         </LiveContainer>
         <TeamView />
         <Footer>
