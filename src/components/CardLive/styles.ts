@@ -37,25 +37,6 @@ export const LiveText = styled.Text`
   font-weight: bold;
 `;
 
-// Team
-export const TeamContainer = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 16px;
-  z-index: 0;
-`;
-
-export const VSContainer = styled.View`
-  margin-left: 8px;
-`;
-
-export const VSText = styled.Text`
-  font-size: 12px;
-  font-family: ${theme.FONT_FAMILY.REGULAR};
-  color: ${theme.COLORS.GRAY_300};
-`;
-
 // Footer
 export const Footer = styled.View`
   position: absolute;

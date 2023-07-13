@@ -4,9 +4,6 @@ import {
   CardContent,
   LiveContainer,
   LiveText,
-  TeamContainer,
-  VSContainer,
-  VSText,
   Footer,
   FooterText,
   FooterCircle
@@ -21,15 +18,7 @@ export function CardLive() {
         <LiveContainer>
           <LiveText>Agora</LiveText>
         </LiveContainer>
-        <TeamContainer>
-          <TeamView />
-          <View>
-            <VSContainer>
-              <VSText>vs</VSText>
-            </VSContainer>
-          </View>
-          <TeamView />
-        </TeamContainer>
+        <TeamView />
         <Footer>
           <FooterCircle />
           <FooterText>
