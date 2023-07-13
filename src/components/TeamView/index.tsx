@@ -23,7 +23,7 @@ export function TeamView() {
     </View>
     <TeamWrapper>
       <TeamLogo />
-      <TeamText>Time A</TeamText>
+      <TeamText>Time B</TeamText>
       </TeamWrapper>
   </TeamContainer>
   );
