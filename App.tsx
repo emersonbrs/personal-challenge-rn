@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components';
 import { useFonts, Roboto_500Medium, Roboto_700Bold, Roboto_400Regular } from '@expo-google-fonts/roboto';
 
 import theme from '@theme/index';
-import { Home } from '@screens/Home';
+
+import { Routes } from './src/routes';
 
 export default function App() {
   const [fontLoad] = useFonts({ Roboto_500Medium, Roboto_700Bold, Roboto_400Regular });
@@ -15,7 +16,7 @@ export default function App() {
         barStyle="light-content"
         backgroundColor="transparent"
       />
-      {fontLoad ? <Home /> : <ActivityIndicator />}
+      {fontLoad ? <Routes /> : <ActivityIndicator />}
     </ThemeProvider>
   );
 }

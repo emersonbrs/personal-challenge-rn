@@ -2,10 +2,10 @@ import { Container, Title } from './styles';
 import { CardLive } from '@components/CardLive'
 import { TouchableOpacity } from 'react-native';
 
-export function Home() {
+export function Details() {
   return (
     <Container>
-      <Title>Partidas</Title>
+      <Title>Uhul</Title>
       <TouchableOpacity onPress={() => console.log('Card pressed')}>
         <CardLive />
       </TouchableOpacity>
