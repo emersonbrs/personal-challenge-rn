@@ -1,8 +1,6 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment/locale/pt-br';
+import { CsgoDTO, TeamViewDTO } from 'src/dtos/CsgoDTO';
 
-import { View } from 'react-native';
 import { 
   CardContent,
   LiveContainer,
@@ -12,32 +10,25 @@ import {
   FooterCircle
 } from './styles';
 
-import { TeamView } from '@components/TeamView'
+import { TeamView } from '@components/TeamView';
+interface CardLiveProps {
+  games: CsgoDTO;
+  agenda: string;
+}
 
-export function CardLive({ games }) {
-  
-  function agendado(scheduled){
-    const date = moment(scheduled).utc().locale('pt-br');
-
-    const dayOfWeek = date.format('ddd, HH:mm');
-
-    return dayOfWeek;
-  }
-
+export function CardLive({ games, agenda }: CardLiveProps) {
   return (
-    <View>
-      <CardContent>
-        <LiveContainer>
-          <LiveText>{agendado(games.scheduled_at)}</LiveText>
-        </LiveContainer>
-        <TeamView teams={games.opponents}/>
-        <Footer>
-          <FooterCircle />
-          <FooterText>
-            {games.league.name} + {games.serie.season}
-          </FooterText>
-        </Footer>
-      </CardContent>
-    </View>
+    <CardContent>
+      <LiveContainer>
+        <LiveText>{agenda}</LiveText>
+      </LiveContainer>
+      <TeamView teams={games.opponents}/>
+      <Footer>
+        <FooterCircle />
+        <FooterText>
+          {games.league.name} {games.serie.season}
+        </FooterText>
+      </Footer>
+    </CardContent>
   );
 };

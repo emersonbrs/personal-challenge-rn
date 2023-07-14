@@ -14,6 +14,7 @@ export const CardWrapper = styled.View`
 export const CardLeft = styled.View`
     width: 174px;
     height: 54px;
+    margin-bottom: 20px;
     background-color: ${({ theme }) => theme.COLORS.BLUE_100};
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -21,7 +22,6 @@ export const CardLeft = styled.View`
     align-items: center;
     justify-content: flex-end;
 `;
-
 
 export const FrameName = styled.View``;
 
@@ -32,6 +32,7 @@ export const ViewFrame = styled.View`
 export const CardRight = styled.View`
     width: 174px;
     height: 54px;
+    margin-bottom: 20px;
     background-color: ${({ theme }) => theme.COLORS.BLUE_100};
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
@@ -40,7 +41,7 @@ export const CardRight = styled.View`
     justify-content: flex-start;
 `;
 
-export const PlayerImg = styled.View`
+export const PlayerImg = styled.Image`
     width: 48.49px;
     height: 48.49px;
     background-color: ${({ theme }) => theme.COLORS.GRAY_200};

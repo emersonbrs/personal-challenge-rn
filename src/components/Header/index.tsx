@@ -1,7 +1,8 @@
 import { useNavigation } from '@react-navigation/native';
 import { Container, TextHeader, BackButton, BackIcon } from './styles';
+import { DataGame } from 'src/dtos/CsgoDTO';
 
-export function Header() {
+export function Header({ dataGame }: DataGame) {
   const navigation = useNavigation();
 
   function handleGoBack(){
@@ -13,7 +14,7 @@ export function Header() {
       <BackButton onPress={handleGoBack}>
         <BackIcon />
       </BackButton>
-      <TextHeader>League + serie</TextHeader>
+      <TextHeader>{dataGame.league.name} {dataGame.serie.season}</TextHeader>
     </Container>
   );
 };

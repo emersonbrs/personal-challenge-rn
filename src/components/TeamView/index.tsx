@@ -9,11 +9,13 @@ import {
   VSText,
 } from './styles';
 
-export function TeamView({ teams }) {
+import { TeamViewDTO } from 'src/dtos/CsgoDTO';
+
+export function TeamView({ teams }: TeamViewDTO) {
   return (
   <TeamContainer>
     <TeamWrapper>
-      <TeamLogo source={{uri: `${teams[0] !== undefined && teams[0].opponent.image_url}`}}/>
+      <TeamLogo style={{resizeMode: 'contain'}} source={{uri: `${teams[0] !== undefined && teams[0].opponent.image_url}`}} withImg={teams[0] === undefined}/>
       <TeamText>{teams[0] !== undefined && teams[0].opponent.name}</TeamText>
     </TeamWrapper>
     <View>
@@ -22,7 +24,7 @@ export function TeamView({ teams }) {
       </VSContainer>
     </View>
     <TeamWrapper>
-      <TeamLogo source={{uri: `${teams[1] !== undefined && teams[1].opponent.image_url}`}}/>
+      <TeamLogo style={{resizeMode: 'contain'}} source={{uri: `${teams[1] !== undefined && teams[1].opponent.image_url}`}} withImg={teams[1] === undefined}/>
       <TeamText>{teams[1] !== undefined && teams[1].opponent.name}</TeamText>
       </TeamWrapper>
   </TeamContainer>

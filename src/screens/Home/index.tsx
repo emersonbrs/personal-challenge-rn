@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import { TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -12,8 +14,14 @@ export function Home() {
 
   const { getList, dataList } = useList();
 
-  function handleDetails(dataGame: {}){
-    navigation.navigate('details', { dataGame });
+  function scheduledFunction(scheduled: string){
+    const date = moment(scheduled).utc().locale('pt-br');
+    const dayOfWeek = date.format('ddd, HH:mm');
+    return dayOfWeek;
+  }
+
+  function handleDetails(dataGame: {}, scheduled: string){
+    navigation.navigate('details', { dataGame, scheduled });
   }
 
   useEffect(() => {
@@ -25,8 +33,8 @@ export function Home() {
       <Title>Partidas</Title>
       <ScrollView>
         {dataList && dataList.map((item) => (
-          <TouchableOpacity onPress={() => handleDetails(item)}>
-              <CardLive games={item}/>
+          <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at))}>
+              <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
           </TouchableOpacity>
 			  ))}
         </ScrollView>

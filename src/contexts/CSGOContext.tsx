@@ -6,7 +6,6 @@ export type CSGOContextDataProps = {
     dataList: CsgoDTO[];
     playerListA: PlayerDTO[];
     playerListB: PlayerDTO[];
-    csgo: CsgoDTO;
     getList: () => Promise<void>;
     getPlayer: (teamOpponent: { opponent: { id: number } }, player: string) => Promise<void>;
 }
@@ -54,7 +53,7 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   }
 
   return(
-    <CSGOContext.Provider value={{dataList, csgo: [], getList, getPlayer, playerListA, playerListB}}>
+    <CSGOContext.Provider value={{dataList, getList, getPlayer, playerListA, playerListB}}>
       {children}
     </CSGOContext.Provider>
   )    

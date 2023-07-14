@@ -19,4 +19,5 @@ export const TextHour = styled.Text`
     font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
     text-align: center;
     padding: 25px;
+    text-transform: capitalize;
 `;

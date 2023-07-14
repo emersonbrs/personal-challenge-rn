@@ -9,7 +9,7 @@ export const CardContent = styled.View`
   background-color: ${({ theme }) => theme.COLORS.BLUE_100};
   border-radius: 16px;
   padding: 24px;
-  margin: 24px;
+  margin: 20px;
   align-self: center;
 `;
 
@@ -18,7 +18,7 @@ export const LiveContainer = styled.View`
   top: 0;
   right: 0;
   
-  background-color: ${({ theme }) => theme.COLORS.RED};
+  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
 
   padding: 8px;
   border-top-right-radius: 16px;

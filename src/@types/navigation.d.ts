@@ -4,6 +4,7 @@ export declare global {
         home: undefined;
         details: {
           dataGame: {};
+          scheduled: string;
         };
       }
     }
