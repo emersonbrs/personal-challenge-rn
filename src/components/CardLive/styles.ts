@@ -34,6 +34,7 @@ export const LiveText = styled.Text`
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: 8px;
   font-weight: bold;
+  text-transform: capitalize;
 `;
 
 // Footer

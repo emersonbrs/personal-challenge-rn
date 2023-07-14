@@ -1,5 +1,7 @@
 export type CsgoDTO = []
 
+export type PlayerDTO = []
+
 export type gameDTO = {
     begin_at: string,
     complete: boolean,

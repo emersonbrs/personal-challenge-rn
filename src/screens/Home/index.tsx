@@ -12,8 +12,8 @@ export function Home() {
 
   const { getList, dataList } = useList();
 
-  function handleDetails(){
-    navigation.navigate('details');
+  function handleDetails(dataGame: {}){
+    navigation.navigate('details', { dataGame });
   }
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function Home() {
       <Title>Partidas</Title>
       <ScrollView>
         {dataList && dataList.map((item) => (
-          <TouchableOpacity onPress={handleDetails}>
+          <TouchableOpacity onPress={() => handleDetails(item)}>
               <CardLive games={item}/>
           </TouchableOpacity>
 			  ))}

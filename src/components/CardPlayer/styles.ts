@@ -6,6 +6,11 @@ export const CardPlayerContainer = styled.View`
     flex-direction: row;
 `;
 
+export const CardWrapper = styled.View`
+    flex-direction: column;
+    justify-content: flex-start;
+`;
+
 export const CardLeft = styled.View`
     width: 174px;
     height: 54px;
@@ -18,7 +23,10 @@ export const CardLeft = styled.View`
 `;
 
 
-export const FrameName = styled.View`
+export const FrameName = styled.View``;
+
+export const ViewFrame = styled.View`
+    flex-direction: column;
 `;
 
 export const CardRight = styled.View`

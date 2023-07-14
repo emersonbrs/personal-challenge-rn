@@ -19,7 +19,7 @@ export function CardLive({ games }) {
   function agendado(scheduled){
     const date = moment(scheduled).utc().locale('pt-br');
 
-    const dayOfWeek = date.format('dddd');
+    const dayOfWeek = date.format('ddd, HH:mm');
 
     return dayOfWeek;
   }
