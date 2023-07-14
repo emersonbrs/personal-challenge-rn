@@ -39,22 +39,24 @@ export function Details() {
     <Container>
       <Header dataGame={dataGame} />
       
-      {isLoading ?
-        <CardTeam>
-          <TeamView teams={dataGame.opponents}/>
-            <CardLive>
-              {dataGame.status === 'running' && <CircleLive />}
-              <TextHour status={dataGame.status}>
-                {dataGame.status === 'running' ? 'AGORA' : scheduled}
-              </TextHour>
-            </CardLive>
-        </CardTeam>
+      {!isLoading ?
+        <>
+          <CardTeam>
+            <TeamView teams={dataGame.opponents}/>
+              <CardLive>
+                {dataGame.status === 'running' && <CircleLive />}
+                <TextHour status={dataGame.status}>
+                  {dataGame.status === 'running' ? 'AGORA' : scheduled}
+                </TextHour>
+              </CardLive>
+          </CardTeam>
+          <CardPlayer teams={dataGame.opponents}/>
+        </>
       :
         <Content isLoading={isLoading}>
           <ActivityIndicator size="large" />
         </Content>
       }
-      <CardPlayer teams={dataGame.opponents}/>
     </Container>
   );
 }

@@ -12,7 +12,7 @@ export const Container = styled(SafeAreaView)`
 `;
 
 export const Content = styled.View<LoadingProps>`
-    ${props => !props.isLoading && css`
+    ${props => props.isLoading && css`
         flex: 1;
         align-items: center;
         justify-content: center;

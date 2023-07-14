@@ -13,8 +13,7 @@ import { useList } from '@hooks/useList';
 export function Home() {
   const navigation = useNavigation();
 
-  const { getList, dataList } = useList();
-  const [isLoading, setIsLoading] = useState(false);
+  const { getList, dataList, isLoading } = useList();
   
   function scheduledFunction(scheduled: string){
     const today = new Date();
@@ -36,15 +35,13 @@ export function Home() {
   }
 
   useEffect(() => {
-    getList().then(()=> setIsLoading(true));
+    getList();
   },[])
-
-  console.log('dataList', dataList)
 
   return (
     <Container>
       <Title>Partidas</Title>
-      {isLoading ?
+      {!isLoading ?
         <ScrollView showsVerticalScrollIndicator={false}>
           {dataList && dataList.map((item) => (
             <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>

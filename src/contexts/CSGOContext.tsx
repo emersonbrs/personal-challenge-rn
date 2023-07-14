@@ -1,4 +1,4 @@
-import { useState, createContext, ReactNode } from 'react';
+import { useState, createContext, ReactNode, SetStateAction, Dispatch } from 'react';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 
@@ -9,8 +9,11 @@ export type CSGOContextDataProps = {
     dataList: CsgoDTO[];
     playerListA: PlayerDTO[];
     playerListB: PlayerDTO[];
-    getList: () => Promise<{}>;
+    isLoading: boolean;
+    getList: () => Promise<void>;
     getPlayer: (teamOpponent: { opponent: { id: number } }, player: string) => Promise<void>;
+    setPlayerListA: Dispatch<SetStateAction<PlayerDTO[]>>;
+    setPlayerListB: Dispatch<SetStateAction<PlayerDTO[]>>;
 }
 
 type CSGOContextProviderProps = {
@@ -24,48 +27,57 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   const [playerListA, setPlayerListA] = useState<PlayerDTO[]>([]);
   const [playerListB, setPlayerListB] = useState<PlayerDTO[]>([]);
   
+  const [isLoading, setIsLoading] = useState(false);
+
   async function getList(){
     try {
-    
+      setIsLoading(true)
       const params = {
         token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
       };
 
       const today = new Date();
       
-      const response = await api.get(
-        `/csgo/matches?sort=-scheduled_at&filter[begin_at]=${moment(today).utc().locale('pt-br').format('YYYY-MM-DD')}&page=1&per_page=10`, {params}
-      );
-
-      setDataList(response.data.reverse());
-      
-      return response;
+      await api.get(
+        `/csgo/matches?sort=-scheduled_at&filter[begin_at]=${moment(today).utc().locale('pt-br').format('YYYY-MM-DD')}&page=1&per_page=&filter[finished]=false`, {params}
+      ).then(res => {
+        setDataList(res.data.reverse())
+        setIsLoading(false)
+      });
 
     } catch (error) {
+      setIsLoading(false)
       throw error;
     }
   }
 
   async function getPlayer(teamOpponent: { opponent: { id: number } }, player: string){
     try {
+      setIsLoading(true)
       const params = {
         token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
       };
       
-      const response = await api.get(`/csgo/players?filter[team_id]=${teamOpponent.opponent.id}`, {params});
+      await api.get(`/csgo/players?filter[team_id]=${teamOpponent.opponent.id}`, {params}).then(res => {
+        
+        if (player === 'PlayerA') {
+          setPlayerListA(res.data);
+        } else if (player === 'PlayerB') {
+          setPlayerListB(res.data);
+        }
 
-      if (player === 'PlayerA') {
-        setPlayerListA(response.data);
-      } else if (player === 'PlayerB') {
-        setPlayerListB(response.data);
-      }
+        setIsLoading(false)
+      });
+
+      
     } catch (error) {
-      throw error;
+        setIsLoading(false)
+        throw error;
     }
   }
 
   return(
-    <CSGOContext.Provider value={{dataList, getList, getPlayer, playerListA, playerListB}}>
+    <CSGOContext.Provider value={{dataList, getList, getPlayer, playerListA, playerListB, isLoading, setPlayerListA, setPlayerListB}}>
       {children}
     </CSGOContext.Provider>
   )    
