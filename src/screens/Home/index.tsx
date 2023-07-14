@@ -13,11 +13,20 @@ export function Home() {
   const navigation = useNavigation();
 
   const { getList, dataList } = useList();
-
+  
   function scheduledFunction(scheduled: string){
+    const today = new Date();
     const date = moment(scheduled).utc().locale('pt-br');
-    const dayOfWeek = date.format('ddd, HH:mm');
-    return dayOfWeek;
+  
+    let day = '';
+  
+    if(moment(today).utc().locale('pt-br').format('YYYY-MM-DD') === date.format('YYYY-MM-DD')) {
+      day = 'Hoje, ' + date.format('ddd, HH:mm'); 
+    } else {
+      day = date.format('ddd, HH:mm');
+    }
+  
+    return day;
   }
 
   function handleDetails(dataGame: {}, scheduled: string){
