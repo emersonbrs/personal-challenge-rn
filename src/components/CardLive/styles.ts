@@ -1,4 +1,18 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
+
+interface LiveProps {
+  status: boolean;
+}
+
+interface LiveTextProps {
+  status: string;
+}
+
+
+interface FooterProps {
+  withImg: string;
+}
+
 
 // Card
 export const CardContainer = styled.View``
@@ -13,12 +27,18 @@ export const CardContent = styled.View`
   align-self: center;
 `;
 
-export const LiveContainer = styled.View`
+export const LiveContainer = styled.View<LiveProps>`
   position: absolute;
   top: 0;
   right: 0;
   
-  background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  ${props => props.status && css`
+    background-color: ${({ theme }) => theme.COLORS.RED};
+  `}
+
+  ${props => !props.status && css`
+    background-color: ${({ theme }) => theme.COLORS.GRAY_300};
+  `}
 
   padding: 8px;
   border-top-right-radius: 16px;
@@ -28,13 +48,16 @@ export const LiveContainer = styled.View`
   justify-content: center;
 `;
 
-export const LiveText = styled.Text`
+export const LiveText = styled.Text<LiveTextProps>`
   color: ${({ theme }) => theme.COLORS.WHITE};
 
   font-family: ${({ theme }) => theme.FONT_FAMILY.BOLD};
   font-size: 8px;
   font-weight: bold;
-  text-transform: capitalize;
+
+  ${props => props.status !== 'running' && css`
+    text-transform: capitalize;
+  `}
 `;
 
 // Footer
@@ -58,10 +81,12 @@ export const FooterText = styled.Text`
   margin-left: 5px;
 `;
 
-export const FooterCircle = styled.View`
+export const FooterCircle = styled.Image<FooterProps>`
   width: 16px;
   height: 16px;
-  border-radius: 8px;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_200};
+  ${props => props.withImg === null && css`
+    border-radius: 8px;
+    background-color: ${({ theme }) => theme.COLORS.GRAY_200};
+  `}
   margin-right: 4px;
 `;

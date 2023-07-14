@@ -3,6 +3,7 @@ import { Container, TextHeader, BackButton, BackIcon } from './styles';
 import { DataGame } from 'src/dtos/CsgoDTO';
 
 export function Header({ dataGame }: DataGame) {
+
   const navigation = useNavigation();
 
   function handleGoBack(){

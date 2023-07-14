@@ -1,4 +1,7 @@
 import { useState, createContext, ReactNode } from 'react';
+import moment from 'moment';
+import 'moment/locale/pt-br';
+
 import { CsgoDTO, PlayerDTO } from 'src/dtos/CsgoDTO';
 import { api } from '@services/api';
 
@@ -6,7 +9,7 @@ export type CSGOContextDataProps = {
     dataList: CsgoDTO[];
     playerListA: PlayerDTO[];
     playerListB: PlayerDTO[];
-    getList: () => Promise<void>;
+    getList: () => Promise<{}>;
     getPlayer: (teamOpponent: { opponent: { id: number } }, player: string) => Promise<void>;
 }
 
@@ -20,15 +23,24 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   const [dataList, setDataList] = useState<CsgoDTO[]>([]);
   const [playerListA, setPlayerListA] = useState<PlayerDTO[]>([]);
   const [playerListB, setPlayerListB] = useState<PlayerDTO[]>([]);
-
+  
   async function getList(){
     try {
+    
       const params = {
         token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
       };
+
+      const today = new Date();
       
-      const response = await api.get('/csgo/matches?sort=&page=1&per_page=50', {params});
-      setDataList(response.data);
+      const response = await api.get(
+        `/csgo/matches?sort=-scheduled_at&filter[begin_at]=${moment(today).utc().locale('pt-br').format('YYYY-MM-DD')}&page=1&per_page=10`, {params}
+      );
+
+      setDataList(response.data.reverse());
+      
+      return response;
+
     } catch (error) {
       throw error;
     }

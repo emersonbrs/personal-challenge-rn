@@ -3,10 +3,12 @@ export type CsgoDTO = {
     opponents: Team;
     league: {
         name: string;
+        image_url: string;
     };
     serie: {
         season: string;
     };
+    status: string
 }
 
 export type TeamViewDTO = {

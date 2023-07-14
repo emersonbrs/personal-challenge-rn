@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import { TouchableOpacity, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Container, Title } from './styles';
+import { Container, Content, Title } from './styles';
 import { CardLive } from '@components/CardLive'
 
 import { useList } from '@hooks/useList';
@@ -13,6 +14,7 @@ export function Home() {
   const navigation = useNavigation();
 
   const { getList, dataList } = useList();
+  const [isLoading, setIsLoading] = useState(false);
   
   function scheduledFunction(scheduled: string){
     const today = new Date();
@@ -21,7 +23,7 @@ export function Home() {
     let day = '';
   
     if(moment(today).utc().locale('pt-br').format('YYYY-MM-DD') === date.format('YYYY-MM-DD')) {
-      day = 'Hoje, ' + date.format('ddd, HH:mm'); 
+      day = 'Hoje, ' + date.format('HH:mm');
     } else {
       day = date.format('ddd, HH:mm');
     }
@@ -29,24 +31,32 @@ export function Home() {
     return day;
   }
 
-  function handleDetails(dataGame: {}, scheduled: string){
-    navigation.navigate('details', { dataGame, scheduled });
+  function handleDetails(dataGame: {}, scheduled: string, isLoading: boolean){
+    navigation.navigate('details', { dataGame, scheduled, isLoading });
   }
 
   useEffect(() => {
-    getList();
+    getList().then(()=> setIsLoading(true));
   },[])
+
+  console.log('dataList', dataList)
 
   return (
     <Container>
       <Title>Partidas</Title>
-      <ScrollView>
-        {dataList && dataList.map((item) => (
-          <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at))}>
-              <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
-          </TouchableOpacity>
-			  ))}
+      {isLoading ?
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {dataList && dataList.map((item) => (
+            <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>
+                <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
+            </TouchableOpacity>
+          ))}
         </ScrollView>
+          :
+        <Content isLoading={isLoading}>
+          <ActivityIndicator size="large" />
+        </Content>
+      }
     </Container>
   );
 }

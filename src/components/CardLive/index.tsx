@@ -1,5 +1,5 @@
 import React from 'react';
-import { CsgoDTO, TeamViewDTO } from 'src/dtos/CsgoDTO';
+import { CsgoDTO } from 'src/dtos/CsgoDTO';
 
 import { 
   CardContent,
@@ -19,12 +19,12 @@ interface CardLiveProps {
 export function CardLive({ games, agenda }: CardLiveProps) {
   return (
     <CardContent>
-      <LiveContainer>
-        <LiveText>{agenda}</LiveText>
+      <LiveContainer status={games.status === 'running'}>
+        <LiveText status={games.status}>{games.status === 'running' ? 'AGORA' : agenda}</LiveText>
       </LiveContainer>
       <TeamView teams={games.opponents}/>
       <Footer>
-        <FooterCircle />
+        <FooterCircle style={{resizeMode: 'contain'}} source={{uri: games.league.image_url}} withImg={games.league.image_url}/>
         <FooterText>
           {games.league.name} {games.serie.season}
         </FooterText>

@@ -5,6 +5,7 @@ export declare global {
         details: {
           dataGame: {};
           scheduled: string;
+          isLoading: boolean
         };
       }
     }
