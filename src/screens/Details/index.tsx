@@ -60,4 +60,3 @@ export function Details() {
     </Container>
   );
 }
-// {games.status === 'running' ? 'AGORA' : agenda}

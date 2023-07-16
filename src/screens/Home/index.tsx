@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { useEffect } from 'react';
+import { TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl, FlatList } from 'react-native';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -13,7 +13,7 @@ import { useList } from '@hooks/useList';
 export function Home() {
   const navigation = useNavigation();
 
-  const { getList, dataList, isLoading } = useList();
+  const { getList, dataList, isLoading, setIsLoading, refreshing, setRefreshing } = useList();
   
   function scheduledFunction(scheduled: string){
     const today = new Date();
@@ -34,7 +34,21 @@ export function Home() {
     navigation.navigate('details', { dataGame, scheduled, isLoading });
   }
 
+  function onRefresh() {
+    setRefreshing(true);
+    getList();
+  }
+
+  function renderCard(item: any) {
+    return (
+      <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>
+        <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
+      </TouchableOpacity>
+    )
+  }
+
   useEffect(() => {
+    setIsLoading(true);
     getList();
   },[])
 
@@ -42,13 +56,23 @@ export function Home() {
     <Container>
       <Title>Partidas</Title>
       {!isLoading ?
-        <ScrollView showsVerticalScrollIndicator={false}>
-          {dataList && dataList.map((item) => (
-            <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>
-                <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+      <FlatList data={dataList}
+        renderItem={({item}) => renderCard(item)}
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='#FFF' colors={['#FFF']} />
+        }
+        onEndReachedThreshold={0.4}
+      />
+
+        // <ScrollView showsVerticalScrollIndicator={false}>
+        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='#FFF' />
+        //   {dataList && dataList.map((item) => (
+        //     <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>
+        //         <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
+        //     </TouchableOpacity>
+        //   ))}
+        // </ScrollView>
           :
         <Content isLoading={isLoading}>
           <ActivityIndicator size="large" />

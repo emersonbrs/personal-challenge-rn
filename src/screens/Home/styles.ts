@@ -24,3 +24,10 @@ export const Title = styled.Text`
     font-family: ${({ theme }) => theme.FONT_FAMILY.MEDIUM};
     font-size: 40px;
 `;
+
+export const ScrollViewContent = styled.ScrollView`
+    flex: 1;
+    background-color: 'pink';
+    align-items: 'center';
+    justify-content: 'center';
+`
