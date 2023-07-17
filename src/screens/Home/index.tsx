@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { TouchableOpacity, ScrollView, ActivityIndicator, RefreshControl, FlatList } from 'react-native';
+import { TouchableOpacity,ActivityIndicator, RefreshControl, FlatList } from 'react-native';
 
 import moment from 'moment';
 import 'moment/locale/pt-br';
@@ -64,15 +64,6 @@ export function Home() {
         }
         onEndReachedThreshold={0.4}
       />
-
-        // <ScrollView showsVerticalScrollIndicator={false}>
-        //   <RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor='#FFF' />
-        //   {dataList && dataList.map((item) => (
-        //     <TouchableOpacity onPress={() => handleDetails(item, scheduledFunction(item.scheduled_at), isLoading)}>
-        //         <CardLive games={item} agenda={scheduledFunction(item.scheduled_at)}/>
-        //     </TouchableOpacity>
-        //   ))}
-        // </ScrollView>
           :
         <Content isLoading={isLoading}>
           <ActivityIndicator size="large" />

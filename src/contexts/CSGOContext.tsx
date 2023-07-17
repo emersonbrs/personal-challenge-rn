@@ -1,5 +1,5 @@
 import { useState, createContext, ReactNode, SetStateAction, Dispatch } from 'react';
-import moment, { months } from 'moment';
+import moment from 'moment';
 import 'moment/locale/pt-br';
 
 import { CsgoDTO, PlayerDTO } from 'src/dtos/CsgoDTO';
@@ -15,7 +15,6 @@ export type CSGOContextDataProps = {
     setIsLoading: Dispatch<SetStateAction<boolean>>;
     getList: () => Promise<void>;
     getPlayer: (teamOpponent: { opponent: { id: number } }, player: string) => Promise<void>;
-    setPage: Dispatch<SetStateAction<number>>;
     setPlayerListA: Dispatch<SetStateAction<PlayerDTO[]>>;
     setPlayerListB: Dispatch<SetStateAction<PlayerDTO[]>>;
 }
@@ -30,7 +29,6 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   const [dataList, setDataList] = useState<CsgoDTO[]>([]);
   const [playerListA, setPlayerListA] = useState<PlayerDTO[]>([]);
   const [playerListB, setPlayerListB] = useState<PlayerDTO[]>([]);
-  const [page, setPage] = useState(1);
   
   const [isLoading, setIsLoading] = useState(false);
 
@@ -39,7 +37,7 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   async function getList(){
     try {
       const params = {
-        token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
+        token: process.env.REACT_APP_API_TOKEN,
       };
 
       const today = new Date();
@@ -70,18 +68,16 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
     try {
       setIsLoading(true)
       const params = {
-        token: '9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA',
+        token: process.env.REACT_APP_API_TOKEN,
       };
       
       await api.get(`/csgo/players?filter[team_id]=${teamOpponent.opponent.id}`, {params}).then(res => {
-        
         if (player === 'PlayerA') {
           setPlayerListA(res.data);
         } else if (player === 'PlayerB') {
+          setIsLoading(false)
           setPlayerListB(res.data);
         }
-
-        setIsLoading(false)
       });
 
       
@@ -102,7 +98,6 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
       setIsLoading,
       refreshing,
       setRefreshing,
-      setPage,
       setPlayerListA,
       setPlayerListB
     }}>
