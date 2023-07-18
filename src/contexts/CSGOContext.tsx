@@ -37,7 +37,7 @@ export function CSGOContextProvider({ children }: CSGOContextProviderProps) {
   async function getList(){
     try {
       const params = {
-        token: process.env.REACT_APP_API_TOKEN,
+        token: "9P8qPHIAhwNpSko2PU-7jlxuW9yDu2R40F5pTBtSJ1L8k1VVyjA",
       };
 
       const today = new Date();
